@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.example.rubberstoreapp.feature_app.presentation.theme.TextFieldBackground
 
 @Composable
 fun MenuItem(
@@ -58,6 +59,7 @@ fun HomeCard(
 ) {
     Card(
         shape = RoundedCornerShape(0.dp),
+        backgroundColor= TextFieldBackground,
         modifier = Modifier
             .padding(
                 start = 1.dp,
@@ -71,9 +73,11 @@ fun HomeCard(
         Card(
             shape = androidx.compose.material3.MaterialTheme.shapes.small,
             modifier = Modifier
+                //.background(TextFieldBackground)
                 .padding(3.dp)
                 .fillMaxSize(),
             elevation = 2.dp,
+            backgroundColor= TextFieldBackground,
             onClick = navigate
         ) {
             Column(modifier = Modifier,

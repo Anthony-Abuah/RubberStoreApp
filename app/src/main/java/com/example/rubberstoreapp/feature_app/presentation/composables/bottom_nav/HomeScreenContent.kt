@@ -24,6 +24,7 @@ import com.example.rubberstoreapp.feature_app.presentation.composables.item.Item
 import com.example.rubberstoreapp.feature_app.presentation.composables.revenue.RevenueScreens
 import com.example.rubberstoreapp.feature_app.presentation.composables.savings.SavingScreens
 import com.example.rubberstoreapp.feature_app.presentation.composables.supplier.SupplierScreens
+import com.example.rubberstoreapp.feature_app.presentation.theme.TextFieldBackground
 
 @Composable
 @ExperimentalMaterialApi
@@ -35,7 +36,7 @@ fun HomeScreenContent(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Transparent)
+            .background(TextFieldBackground)
             .padding(
                 top = 50.dp,
                 bottom = 50.dp

@@ -54,7 +54,7 @@ fun AddInventoryItemAlertDialog(
 
             AlertDialog(
                 modifier = Modifier
-                    .padding(32.dp),
+                    .padding(8.dp),
                 onDismissRequest = {
                     Toast.makeText(context, "Inventory item not added", Toast.LENGTH_LONG).show()
                     closeDialog()

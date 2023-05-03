@@ -70,3 +70,16 @@ fun ReportCardHeaderMenu(
         textDecoration = TextDecoration.None
     )
 }
+
+@Composable
+fun ReportCardHeaderMenu2(
+    title: String
+) {
+    Text(
+        text = title,
+        fontWeight= FontWeight.ExtraBold,
+        color = Color.Black,
+        fontSize = 20.sp,
+        textDecoration = TextDecoration.None
+    )
+}

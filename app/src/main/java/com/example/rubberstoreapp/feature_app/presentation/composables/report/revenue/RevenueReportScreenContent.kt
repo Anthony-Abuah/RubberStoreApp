@@ -57,7 +57,7 @@ fun RevenueReportScreenContent(
 
     Box(
         modifier = Modifier
-            .background(RevenueReportBackground)
+            .background(ReportBackground)
             .fillMaxSize()
             .padding(top = 50.dp, bottom = 50.dp)
     ) {

@@ -13,7 +13,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.rubberstoreapp.feature_app.domain.repository.Banks
 import com.example.rubberstoreapp.feature_app.domain.repository.Customers
@@ -42,7 +41,9 @@ fun ReportScreenContent(
     monthlyDebtRepayment: Double,
     monthlyRevenue: Double,
     monthlyExpenses: Double,
-    monthlySavings: Double
+    monthlySavings: Double,
+    allInventory: Double,
+    durationalInventory: Double
 ) {
     var clicked by remember {
         mutableStateOf(true)
@@ -50,7 +51,7 @@ fun ReportScreenContent(
 
     Box(
         modifier = Modifier
-            .background(GeneralReportBackground)
+            .background(ReportBackground)
             .fillMaxSize()
             .padding(top = 50.dp, bottom = 50.dp)
     ) {
@@ -62,7 +63,7 @@ fun ReportScreenContent(
             ) {
                 //Monthly and all time button indicator
                 Card(shape = androidx.compose.material.MaterialTheme.shapes.small,
-                    backgroundColor = if (clicked) AllTimeButtonColor else ButtonBackgroundDisabled,
+                    backgroundColor = if (clicked) SwitchButtonEnabled else SwitchButtonDisabled,
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxHeight(),
@@ -81,7 +82,7 @@ fun ReportScreenContent(
                 Spacer(modifier = Modifier.width(5.dp))
 
                 Card(shape = androidx.compose.material.MaterialTheme.shapes.small,
-                    backgroundColor = if (clicked) ButtonBackgroundDisabled else AllTimeButtonColor,
+                    backgroundColor = if (clicked) SwitchButtonDisabled else SwitchButtonEnabled,
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxHeight(),
@@ -98,7 +99,6 @@ fun ReportScreenContent(
                         val month =
                             LocalDate.now().month.toString().lowercase().capitalize(Locale.ROOT)
                         val year = LocalDate.now().year.toString()
-
                         ReportCardHeaderMenu(title = "$month, $year")
                     }
                 }
@@ -188,7 +188,7 @@ fun ReportScreenContent(
                             end = 1.dp)) {
                         ReportCardTitle(title = "Net Income")
                         Spacer(modifier = Modifier.fillMaxHeight(0.6f))
-                        ReportCardValue(value = if (clicked) "GHS ${revenue - expenses}0" else "GHS ${monthlyRevenue - monthlyExpenses}0")
+                        ReportCardValue(value = if (clicked) "GHS ${revenue - expenses - allInventory}0" else "GHS ${monthlyRevenue - monthlyExpenses - durationalInventory}0")
                     }
                 }
 
@@ -223,12 +223,12 @@ fun ReportScreenContent(
 
 
             Row(
-                //Debt, Debt Payment, Savings
+                //Debt & Debt Payment, Inventory
                 modifier = Modifier
                     .fillMaxWidth()
                     .requiredHeight(125.dp)
             ) {
-                //Debt Card
+                //Debt & Debt Payment
                 Card(shape = androidx.compose.material.MaterialTheme.shapes.small,
                     backgroundColor = DebtReportCardColor,
                     modifier = Modifier
@@ -241,21 +241,25 @@ fun ReportScreenContent(
                     }) {
                     Column(modifier = Modifier
                         .padding(
-                            top = 16.dp,
-                            bottom = 16.dp,
+                            top = 8.dp,
+                            bottom = 8.dp,
                             start = 8.dp,
                             end = 1.dp)) {
                         ReportCardTitle(title = "Debt")
-                        Spacer(modifier = Modifier.fillMaxHeight(0.6f))
                         ReportCardValue(value = if (clicked) "GHS ${debt}0" else "GHS ${monthlyDebt}0")
+
+                        Spacer(modifier = Modifier.fillMaxHeight(0.2f))
+
+                        ReportCardTitle(title = "Debt Payment")
+                        ReportCardValue(value = if (clicked) "GHS ${debtPayment}0" else "GHS ${monthlyDebtRepayment}0")
                     }
                 }
 
                 Spacer(modifier = Modifier.width(10.dp))
 
-                //Debt Payment Card
+                //Inventory Card
                 Card(shape = androidx.compose.material.MaterialTheme.shapes.small,
-                    backgroundColor = DebtPaymentReportCardColor,
+                    backgroundColor = InventoryReportCardColor,
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxHeight()
@@ -270,9 +274,9 @@ fun ReportScreenContent(
                             bottom = 16.dp,
                             start = 8.dp,
                             end = 1.dp)) {
-                        ReportCardTitle(title = "Debt Payment")
+                        ReportCardTitle(title = "Inventory")
                         Spacer(modifier = Modifier.fillMaxHeight(0.6f))
-                        ReportCardValue(value = if (clicked) "GHS ${debtPayment}0" else "GHS ${monthlyDebtRepayment}0")
+                        ReportCardValue(value = if (clicked) "GHS ${allInventory}0" else "GHS ${durationalInventory}0")
                     }
                 }
             }
@@ -387,7 +391,7 @@ fun ReportScreenContent(
                         horizontalArrangement = Arrangement.Center,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        ReportCardHeader1(title = "Items")
+                        ReportCardHeader1(title = "Inventory Items")
                     }
 
                     Spacer(modifier = Modifier.height(8.dp))

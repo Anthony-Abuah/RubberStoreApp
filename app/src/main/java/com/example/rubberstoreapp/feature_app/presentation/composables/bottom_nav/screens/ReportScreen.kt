@@ -29,6 +29,7 @@ fun ReportScreen(
     val savingViewModel: SavingViewModel = hiltViewModel()
     val expenseViewModel: ExpenseViewModel = hiltViewModel()
     val revenueViewModel: RevenueViewModel = hiltViewModel()
+    val inventoryViewModel: InventoryViewModel = hiltViewModel()
 
     val dayOfMonth = LocalDate.now().dayOfMonth - 1
     val dateOfCurrentMonth =
@@ -50,6 +51,10 @@ fun ReportScreen(
 
         revenueViewModel.getTotalSumOfAllRevenue()
         revenueViewModel.getSumOfRevenueBetweenDates(dateOfCurrentMonth, currentDate)
+
+        inventoryViewModel.getAllTimeTotalCost()
+        inventoryViewModel.getDurationalTotalCost(dateOfCurrentMonth, currentDate)
+
     }
 
 
@@ -80,6 +85,9 @@ fun ReportScreen(
     val savings = savingViewModel.totalSumOfAllSavings ?: 0.0
     val monthlySavings = savingViewModel.sumOfSavingsBetweenDates
 
+    val allInventory = inventoryViewModel.allTimeTotalCost ?: 0.0
+    val durationalInventory = inventoryViewModel.durationalTotalCost
+
     Scaffold(
         topBar = {
             AppTopBar(label = "Report")
@@ -104,7 +112,8 @@ fun ReportScreen(
                 monthlyDebtPayment,
                 monthlyRevenue,
                 monthlyExpenses,
-                monthlySavings
+                monthlySavings,
+                allInventory, durationalInventory
             )
         }
     )

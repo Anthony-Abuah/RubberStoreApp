@@ -44,7 +44,7 @@ fun ExpensesReportScreenContent(
 
     Box(
         modifier = Modifier
-            .background(ExpensesReportBackground)
+            .background(ReportBackground)
             .fillMaxSize()
             .padding(top = 50.dp, bottom = 50.dp)
     ) {
@@ -132,7 +132,7 @@ fun ExpensesReportScreenContent(
                                 .weight(2f)
                                 .fillMaxWidth(), contentAlignment = Alignment.TopStart
                         ) {
-                            ReportCardTitle(title = "Inventory Cost")
+                            ReportCardTitle(title = "Inventory")
                         }
                         Spacer(modifier = Modifier.weight(2f))
                         Box(
@@ -149,7 +149,7 @@ fun ExpensesReportScreenContent(
 
                 //Expenses Card
                 Card(shape = androidx.compose.material.MaterialTheme.shapes.small,
-                    backgroundColor = MaximumExpensesCardColor,
+                    backgroundColor = OtherExpensesCardColor,
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxHeight()
@@ -197,7 +197,7 @@ fun ExpensesReportScreenContent(
             ) {
                 //Total Expenses Card
                 Card(shape = androidx.compose.material.MaterialTheme.shapes.small,
-                    backgroundColor = InventoryExpensesCardColor,
+                    backgroundColor = TotalExpensesCardColor,
                     modifier = Modifier
                         .fillMaxWidth()
                         .fillMaxHeight()

@@ -57,7 +57,7 @@ fun SavingsReportScreenContent(
 
     Box(
         modifier = Modifier
-            .background(SavingsReportBackground)
+            .background(ReportBackground)
             .fillMaxSize()
             .padding(top = 50.dp, bottom = 50.dp)
     ) {

@@ -33,6 +33,7 @@ object DatabaseModule {
     fun provideDatabase(app: Application): AppDatabase{
         return Room.databaseBuilder(app, AppDatabase::class.java, "appDatabase")
             .addTypeConverter(InventoryItemsConverter(GsonParser(Gson())))
+            //.createFromAsset("database/prePopulatedDataDatabase.db")
             .build()
     }
 
